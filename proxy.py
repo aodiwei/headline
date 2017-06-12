@@ -10,6 +10,7 @@ __mtime__ = '2016/1/7'
 import random
 import re
 
+import js2py
 import requests
 from bs4 import BeautifulSoup
 
@@ -24,33 +25,26 @@ class ProxyMng:
     def get_proxy_id_list(cls):
         ip_port_list = []
         try:
-            req = requests.get("http://www.proxynova.com/proxy-server-list", timeout=10)
+            req = requests.get("https://www.proxynova.com/proxy-server-list/country-cn/", timeout=10)
             context = req.text
-            soup = BeautifulSoup(context, "html5lib")
+            soup = BeautifulSoup(context, "html.parser")
             main = soup.find("table", id="tbl_proxy_list")
+            # js = main.find_all('script')
+            # ips = [js2py.eval_js(j.text.replace('document.write', '')) for j in js if 'substr' in j.text]
             if main:
-                ip_list = main.find_all("span", class_="row_proxy_ip")
-                for x, ip_ele in enumerate(ip_list):
-                    try:
-                        parent = ip_ele.parent.parent
-                        if parent:
-                            # get the best status ip
-                            status = parent.find("span", text=re.compile(r"%"))
-                            status_value = status.text.encode().strip("%")
-                            if int(status_value) < 70:
-                                continue
-                            speed_ele = parent.find("div", class_="progress-bar")
-                            speed = 0
-                            if speed_ele:
-                                speed = speed_ele["data-value"].encode("utf-8")
-                            if float(speed) > 80:
-                                ip = ip_ele.text.encode()
-                                port = ip_ele.find_next().text.strip().encode()
-                                ip_port_list.append((ip, port))
-                    except Exception as e:
-                        pass
+                ip_list = main.contents[3].find_all("tr")
+                for _, ip_ele in enumerate(ip_list):
+                    js = ip_ele.find('script')
+                    if not js:
+                        continue
+                    ip_js = js.text
+                    if 'substr' not in ip_js:
+                        continue
+                    ip = js2py.eval_js(ip_js.replace('document.write', ''))
+                    port = ip_ele.contents[3].text.strip()
+                    ip_port_list.append((ip, port))
         except Exception as e:
-            print("proxy website had exception")
+            print("proxy website had exception", e)
 
         return ip_port_list
 
@@ -68,7 +62,7 @@ class ProxyMng:
                     ip, port = ip_ele.contents[0].text, ip_ele.contents[1].text
                     ip_port_list.append((ip, port))
         except Exception as e:
-            print("proxy website had exception")
+            print("proxy website had exception", e)
             # default
             cls.get_proxy_id_list()
         return ip_port_list

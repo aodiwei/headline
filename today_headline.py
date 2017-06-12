@@ -29,8 +29,8 @@ def wrap():
 
 
 if __name__ == '__main__':
-    # pool = dummy.Pool()
-    # pool.apply_async(wrap)
-    # pool.close()
-    # pool.join()
-    run()
+    pool = dummy.Pool()
+    pool.apply_async(wrap)
+    pool.close()
+    pool.join()
+    # run()
