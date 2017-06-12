@@ -73,7 +73,7 @@ class ProxyMng:
         get random proxy id
         :return:
         """
-        if not cls.__ip_port_list:
+        if not cls.__ip_port_list or len(cls.__ip_port_list) <= 5:
             cls.__ip_port_list = cls.get_proxy_id_list()
 
         if cls.__ip_port_list:
@@ -115,7 +115,7 @@ class ProxyMng:
                     req = requests.get(url, timeout=timeout)
 
                 if req.status_code == 200:
-                    context = req.text.encode("utf-8")
+                    # context = req.text.encode("utf-8")
                     break
                 else:
                     retry += 1
