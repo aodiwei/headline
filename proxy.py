@@ -8,6 +8,7 @@ __mtime__ = '2016/1/7'
 """
 
 import random
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -19,9 +20,42 @@ class ProxyMng:
     """
     __ip_port_list = None
     __proxy_openers = None
-
     @classmethod
     def get_proxy_id_list(cls):
+        ip_port_list = []
+        try:
+            req = requests.get("http://www.proxynova.com/proxy-server-list", timeout=10)
+            context = req.text
+            soup = BeautifulSoup(context, "html5lib")
+            main = soup.find("table", id="tbl_proxy_list")
+            if main:
+                ip_list = main.find_all("span", class_="row_proxy_ip")
+                for x, ip_ele in enumerate(ip_list):
+                    try:
+                        parent = ip_ele.parent.parent
+                        if parent:
+                            # get the best status ip
+                            status = parent.find("span", text=re.compile(r"%"))
+                            status_value = status.text.encode().strip("%")
+                            if int(status_value) < 70:
+                                continue
+                            speed_ele = parent.find("div", class_="progress-bar")
+                            speed = 0
+                            if speed_ele:
+                                speed = speed_ele["data-value"].encode("utf-8")
+                            if float(speed) > 80:
+                                ip = ip_ele.text.encode()
+                                port = ip_ele.find_next().text.strip().encode()
+                                ip_port_list.append((ip, port))
+                    except Exception as e:
+                        pass
+        except Exception as e:
+            print("proxy website had exception")
+
+        return ip_port_list
+
+    @classmethod
+    def get_proxy_id_list_us(cls):
         ip_port_list = []
         try:
             req = requests.get("https://www.us-proxy.org", timeout=20)
