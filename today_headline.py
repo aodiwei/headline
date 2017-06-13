@@ -35,4 +35,5 @@ if __name__ == '__main__':
     # pool.close()
     # pool.join()
     # run()
-    map(wrap, range(300))
+    for i in range(300):
+        wrap(i)
