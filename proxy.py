@@ -21,6 +21,7 @@ class ProxyMng:
     """
     __ip_port_list = None
     __proxy_openers = None
+
     @classmethod
     def get_proxy_id_list(cls):
         ip_port_list = []
@@ -97,7 +98,7 @@ class ProxyMng:
         error_msg = "out of range of retry connection"
         while 1:
             # if retry > 4:  # retry url
-                # raise ValueError(error_msg)
+            # raise ValueError(error_msg)
             try:
                 # when retry a opener 2 times and it still unavailable, then remove it
                 if retry > 0:
@@ -130,6 +131,7 @@ class ProxyMng:
         ProxyMng.__ip_port_list = ProxyMng.get_proxy_id_list()
         ProxyMng.__proxy_openers = None
         return "run"
+
 
 if __name__ == '__main__':
     pro = ProxyMng()

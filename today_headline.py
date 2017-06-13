@@ -20,6 +20,8 @@ def run():
             url = url.strip()
             if not url:
                 continue
+            sl = random.randint(10, 60)
+            time.sleep(sl)
             ProxyMng.open_url(url=url)
 
 
@@ -27,7 +29,7 @@ def wrap(i):
     # while 1:
     print('flash {}'.format(i))
     run()
-    sl = random.randint(60 * 10, 60 * 20)
+    sl = random.randint(60 * 1, 60 * 5)
     time.sleep(sl)
 
 
