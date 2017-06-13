@@ -22,8 +22,9 @@ def run():
             ProxyMng.open_url(url=url)
 
 
-def wrap():
+def wrap(i):
     # while 1:
+    print('flash {}'.format(i))
     run()
     time.sleep(60 * 20)
 
