@@ -7,6 +7,7 @@ __mtime__ = '2017/6/11'
 # 
 """
 import time
+import random
 from multiprocessing import dummy
 
 from proxy import ProxyMng
@@ -26,7 +27,8 @@ def wrap(i):
     # while 1:
     print('flash {}'.format(i))
     run()
-    time.sleep(60 * 20)
+    sl = random.randint(60 * 10, 60 * 20)
+    time.sleep(sl)
 
 
 if __name__ == '__main__':
