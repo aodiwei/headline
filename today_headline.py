@@ -23,14 +23,15 @@ def run():
 
 
 def wrap():
-    while 1:
-        run()
-        time.sleep(5)
+    # while 1:
+    run()
+    time.sleep(60 * 20)
 
 
 if __name__ == '__main__':
-    pool = dummy.Pool()
-    pool.apply_async(wrap)
-    pool.close()
-    pool.join()
+    # pool = dummy.Pool()
+    # pool.map_async(wrap, range(200))
+    # pool.close()
+    # pool.join()
     # run()
+    map(wrap, range(300))
