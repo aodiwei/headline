@@ -11,10 +11,11 @@ import random
 from multiprocessing import dummy
 
 from logger_mgr import Logger
-from proxy import ProxyMng
 
 Logger.initialize('line', filePath='/', withConsole=True, level='INFO')
 log = Logger.getInstance()
+
+from proxy import ProxyMng
 
 
 def run():
