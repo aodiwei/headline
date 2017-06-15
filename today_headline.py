@@ -10,7 +10,11 @@ import time
 import random
 from multiprocessing import dummy
 
+from logger_mgr import Logger
 from proxy import ProxyMng
+
+Logger.initialize('line', filePath='/', withConsole=True, level='INFO')
+log = Logger.getInstance()
 
 
 def run():
@@ -20,16 +24,18 @@ def run():
             url = url.strip()
             if not url:
                 continue
-            sl = random.randint(10, 60)
+            sl = random.randint(5, 10)
+            log.info('open sleep {}'.format(sl))
             time.sleep(sl)
             ProxyMng.open_url(url=url)
 
 
 def wrap(i):
     # while 1:
-    print('flash {}'.format(i))
+    log.info('flash {}'.format(i))
     run()
     sl = random.randint(60 * 1, 60 * 5)
+    log.info('loop sleep {}'.format(sl))
     time.sleep(sl)
 
 

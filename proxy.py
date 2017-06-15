@@ -14,6 +14,9 @@ import js2py
 import requests
 from bs4 import BeautifulSoup
 
+from logger_mgr import Logger
+
+log = Logger.getInstance()
 
 class ProxyMng:
     """
@@ -74,7 +77,7 @@ class ProxyMng:
         get random proxy id
         :return:
         """
-        if not cls.__ip_port_list or len(cls.__ip_port_list) <= 5:
+        if not cls.__ip_port_list or len(cls.__ip_port_list) <= 10:
             cls.__ip_port_list = cls.get_proxy_id_list()
 
         if cls.__ip_port_list:
@@ -102,7 +105,7 @@ class ProxyMng:
             try:
                 # when retry a opener 2 times and it still unavailable, then remove it
                 if retry > 0:
-                    print("del proxy %s %s" % (proxies, index))
+                    log.info("del proxy %s %s" % (proxies, index))
                     flag_reget = True
                     if cls.__ip_port_list:
                         cls.__ip_port_list.pop(index)
@@ -123,7 +126,7 @@ class ProxyMng:
             except Exception as e:
                 retry += 1
                 print(e)
-        print('open url:{}'.format(url))
+        log.info('open url:{}'.format(url))
         return context
 
     @classmethod
