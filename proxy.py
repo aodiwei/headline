@@ -25,6 +25,7 @@ class ProxyMng:
     """
     __ip_port_list = None
     __proxy_openers = None
+    __count = 0
 
     @classmethod
     def get_proxy_id_list(cls):
@@ -98,6 +99,7 @@ class ProxyMng:
         :param timeout:
         :return:
         """
+        cls.__count += 1
         context = ""
         retry = 0
         flag_reget = True
@@ -119,6 +121,8 @@ class ProxyMng:
                     flag_reget = False
                 if proxies:
                     if 'toutiao' not in url:
+                        if cls.__count < 20:
+                            break
                         browser_get(url, http_proxy=proxies['http'])
                     else:
                         req = requests.get(url, timeout=timeout, proxies=proxies)

@@ -36,7 +36,7 @@ def wrap(i):
     # while 1:
     log.info('flash {}'.format(i))
     run()
-    sl = random.randint(5, 20)
+    sl = random.randint(1, 3)
     log.info('loop sleep {}'.format(sl))
     time.sleep(sl)
 
