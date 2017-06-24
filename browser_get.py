@@ -16,8 +16,8 @@ from logger_mgr import Logger
 Logger.initialize('line', filePath='/', withConsole=True, level='INFO')
 log = Logger.getInstance()
 
-browser_path = r"D:\DownLoad\phantomjs-2.1.1-windows\bin\phantomjs.exe"
-# browser_path = r'/opt/src/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
+# browser_path = r"D:\DownLoad\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+browser_path = r'/opt/src/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
 
 headers1 = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36',
