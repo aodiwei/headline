@@ -59,9 +59,9 @@ def browser_get(url, http_proxy):
     proxy.add_to_capabilities(webdriver.DesiredCapabilities.PHANTOMJS)
     driver.start_session(webdriver.DesiredCapabilities.PHANTOMJS)
     driver.get(url)
-    log.info('1: ', driver.session_id)
-    # log.info('2: ', driver.page_source)
-    log.info('3: ', driver.get_cookies())
+    log.info('1: {}'.format(driver.session_id))
+    log.info('2: {}'.format(driver.page_source))
+    # log.info('3: ', driver.get_cookies())
 
 # url = r'https://baijiahao.baidu.com/po/feed/share?wfr=spider&for=pc&context=%7B%22sourceFrom%22%3A%22bjh%22%2C%22nid%22%3A%22news_3211521833012663416%22%7D'
 # for i in range(20):
