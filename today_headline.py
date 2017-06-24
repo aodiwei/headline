@@ -9,6 +9,7 @@ __mtime__ = '2017/6/11'
 import time
 import random
 from multiprocessing import dummy
+import requests
 
 from logger_mgr import Logger
 
@@ -25,9 +26,9 @@ def run():
             url = url.strip()
             if not url:
                 continue
-            sl = random.randint(5, 10)
-            log.info('open sleep {}'.format(sl))
-            time.sleep(sl)
+            # sl = random.randint(0, 3)
+            # log.info('open sleep {}'.format(sl))
+            # time.sleep(sl)
             ProxyMng.open_url(url=url)
 
 
@@ -35,9 +36,12 @@ def wrap(i):
     # while 1:
     log.info('flash {}'.format(i))
     run()
-    sl = random.randint(60 * 1, 60 * 5)
+    sl = random.randint(5, 20)
     log.info('loop sleep {}'.format(sl))
     time.sleep(sl)
+
+def parse_content(content):
+    pass
 
 
 if __name__ == '__main__':

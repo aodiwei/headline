@@ -13,6 +13,7 @@ import re
 import js2py
 import requests
 from bs4 import BeautifulSoup
+from browser_get import browser_get
 
 from logger_mgr import Logger
 
@@ -114,7 +115,8 @@ class ProxyMng:
                     proxies, index = cls.get_random_pro_id()
                     flag_reget = False
                 if proxies:
-                    req = requests.get(url, timeout=timeout, proxies=proxies)
+                    browser_get(url, http_proxy=proxies['http'])
+                    # req = requests.get(url, timeout=timeout, proxies=proxies)
                 else:
                     req = requests.get(url, timeout=timeout)
 
