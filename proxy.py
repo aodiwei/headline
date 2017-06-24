@@ -122,6 +122,7 @@ class ProxyMng:
                         browser_get(url, http_proxy=proxies['http'])
                     else:
                         req = requests.get(url, timeout=timeout, proxies=proxies)
+                        log.info('open url:{}'.format(url))
                     break
                 else:
                     req = requests.get(url, timeout=timeout)
