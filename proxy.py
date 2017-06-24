@@ -100,6 +100,8 @@ class ProxyMng:
         :return:
         """
         cls.__count += 1
+        if cls.__count == 200:
+            log.info('useful ips {}'.format(cls.__ip_port_list))
         context = ""
         retry = 0
         flag_reget = True
@@ -121,7 +123,7 @@ class ProxyMng:
                     flag_reget = False
                 if proxies:
                     if 'toutiao' not in url:
-                        if cls.__count < 20:
+                        if cls.__count < 200:
                             break
                         browser_get(url, http_proxy=proxies['http'])
                     else:
