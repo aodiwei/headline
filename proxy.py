@@ -51,6 +51,7 @@ class ProxyMng:
         except Exception as e:
             print("proxy website had exception", e)
 
+        log.info('proxy hosts {}'.format(ip_port_list))
         return ip_port_list
 
     @classmethod
