@@ -59,6 +59,7 @@ def browser_get(url, http_proxy):
     proxy.add_to_capabilities(webdriver.DesiredCapabilities.PHANTOMJS)
     driver.start_session(webdriver.DesiredCapabilities.PHANTOMJS)
     driver.get(url)
+    log.info('0: {}'.format(url))
     log.info('1: {}'.format(driver.session_id))
     log.info('2: {}'.format(driver.page_source))
     # log.info('3: ', driver.get_cookies())
