@@ -58,8 +58,9 @@ def browser_get(url, http_proxy):
     # 将代理设置添加到webdriver.DesiredCapabilities.PHANTOMJS中
     proxy.add_to_capabilities(webdriver.DesiredCapabilities.PHANTOMJS)
     driver.start_session(webdriver.DesiredCapabilities.PHANTOMJS)
+    log.info('starting open {}'.format(url))
     driver.get(url)
-    log.info('0: {}'.format(url))
+    # log.info('0: {}'.format(url))
     log.info('1: {}'.format(driver.session_id))
     # log.info('2: {}'.format(driver.page_source))
     print('2:', driver.page_source)
