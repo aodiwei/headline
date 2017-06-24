@@ -119,12 +119,12 @@ class ProxyMng:
                     # req = requests.get(url, timeout=timeout, proxies=proxies)
                 else:
                     req = requests.get(url, timeout=timeout)
-
-                if req.status_code == 200:
-                    # context = req.text.encode("utf-8")
-                    break
-                else:
-                    retry += 1
+                #
+                # if req.status_code == 200:
+                #     # context = req.text.encode("utf-8")
+                #     break
+                # else:
+                #     retry += 1
             except Exception as e:
                 retry += 1
                 print(e)

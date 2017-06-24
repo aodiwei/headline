@@ -4,7 +4,7 @@
 __title__ = ''
 __author__ = 'David Ao'
 __mtime__ = '2017/6/24'
-# 
+# sudo apt-get install libfontconfig 在linux上先安装这个包
 """
 
 from selenium import webdriver
@@ -16,7 +16,8 @@ from logger_mgr import Logger
 
 log = Logger.getInstance()
 
-browser_path = r"D:\DownLoad\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+# browser_path = r"D:\DownLoad\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+browser_path = r'/opt/src/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
 
 headers1 = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36',
