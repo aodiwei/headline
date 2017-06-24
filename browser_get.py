@@ -13,11 +13,11 @@ import random
 
 from selenium.webdriver.common.proxy import ProxyType
 from logger_mgr import Logger
-
+Logger.initialize('line', filePath='/', withConsole=True, level='INFO')
 log = Logger.getInstance()
 
-# browser_path = r"D:\DownLoad\phantomjs-2.1.1-windows\bin\phantomjs.exe"
-browser_path = r'/opt/src/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
+browser_path = r"D:\DownLoad\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+# browser_path = r'/opt/src/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'
 
 headers1 = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36',
@@ -49,8 +49,8 @@ def browser_get(url, http_proxy):
     webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.settings.userAgent'] = headers['User-Agent']
 
     driver = webdriver.PhantomJS(executable_path=browser_path)
-    # driver.get(url)
-    # driver.refresh()
+    driver.implicitly_wait(10)
+    driver.set_page_load_timeout(10)
 
     proxy = webdriver.Proxy()
     proxy.proxy_type = ProxyType.MANUAL
@@ -61,12 +61,13 @@ def browser_get(url, http_proxy):
     driver.get(url)
     log.info('0: {}'.format(url))
     log.info('1: {}'.format(driver.session_id))
-    log.info('2: {}'.format(driver.page_source))
+    # log.info('2: {}'.format(driver.page_source))
+    print('2:', driver.page_source)
     # log.info('3: ', driver.get_cookies())
 
-# url = r'https://baijiahao.baidu.com/po/feed/share?wfr=spider&for=pc&context=%7B%22sourceFrom%22%3A%22bjh%22%2C%22nid%22%3A%22news_3211521833012663416%22%7D'
+# url = r'http://www.toutiao.com/i6432649786859454978/'
 # for i in range(20):
 #     s = random.randint(1, 4)
-#     run(url)
+#     browser_get(url, '113.245.184.227:8081')
 #     time.sleep(s)
 #     print(i, s)

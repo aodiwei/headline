@@ -118,8 +118,10 @@ class ProxyMng:
                     proxies, index = cls.get_random_pro_id()
                     flag_reget = False
                 if proxies:
-                    browser_get(url, http_proxy=proxies['http'])
-                    # req = requests.get(url, timeout=timeout, proxies=proxies)
+                    if 'toutiao' not in url:
+                        browser_get(url, http_proxy=proxies['http'])
+                    else:
+                        req = requests.get(url, timeout=timeout, proxies=proxies)
                     break
                 else:
                     req = requests.get(url, timeout=timeout)
